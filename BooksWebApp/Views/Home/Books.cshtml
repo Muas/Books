@@ -1,0 +1,63 @@
+﻿@model BooksWebApp.Models.ResultsModel
+@{
+	Layout = null;
+}
+@functions
+{
+
+	string InversedCaret(string title)
+	{
+		return title.Equals(Model.SortTitle)
+			? Model.SortOrder == "desc"
+				? null
+				: "caret-reversed"
+			: "caret-unsorted";
+	}
+
+}
+
+<table class="table table-bordered js-books-table" data-order="@Model.SortOrder" data-title="@Model.SortTitle">
+		<thead class="thead-default">
+			<tr class="table-header">
+				<th class="js-sortable" data-title="Title">Title <span class="caret @InversedCaret("Title")"></span></th>
+				<th>Authors</th>
+				<th>Pages</th>
+				<th>Publisher</th>
+				<th class="js-sortable" data-title="PublicationYear">Publication year<span class="caret @InversedCaret("PublicationYear")"></span></th>
+				<th>ISBN</th>
+				<th>Image</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Books)
+			{
+			<tr class="table-row">
+				<th>@item.Title </th>
+			    <th>
+			        @foreach (var author in item.Authors)
+			        {
+			            <text>@author.FirstName @author.LastName</text>
+			            <br/>
+			        }
+			    </th>
+				<th>@item.Pages</th>
+				<th>@item.Publisher</th>
+				<th>@item.PublicationYear </th>
+				<th>@item.Isbn</th>
+				<th>
+					@if (!string.IsNullOrEmpty(item.Image))
+					{
+						<img src="@Url.Content(item.Image)" class="img-thumbnail col-sm-4 col-md-4">
+					}
+				</th>
+			    <th>
+			        @Html.ActionLink(" ", actionName: "Edit", htmlAttributes: new { @class = "btn btn-default fancybox glyphicon glyphicon-pencil", data_fancybox_type = "iframe" }, routeValues: new { item.Id })
+                    <a href="#" class="btn btn-danger glyphicon glyphicon-remove js-remove" data-id="@item.Id" data-title="@item.Title"></a>
+			    </th>
+			</tr>
+			}
+		</tbody>
+	</table>
+
+

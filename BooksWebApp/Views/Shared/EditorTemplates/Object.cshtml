@@ -1,0 +1,11 @@
+﻿@foreach (var prop in ViewData.ModelMetadata.Properties)
+{
+    <div class="form-group">
+        @Html.Label(prop.PropertyName, htmlAttributes: new { @class = "control-label col-sm-3" })
+        <div class="col-sm-offset-3">
+            @Html.Editor(prop.PropertyName)
+            @Html.ValidationMessage(prop.PropertyName)
+        </div>
+    </div>
+}
+

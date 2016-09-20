@@ -1,0 +1,32 @@
+﻿@model object
+
+@{
+	ViewData.ModelMetadata = (ModelMetadata)ViewBag.RowMetadata;
+	ViewData.TemplateInfo = new TemplateInfo();
+	var first = true;
+}
+<div class="panel panel-default">
+	<div class="panel-body">
+		<table>
+			@foreach (var prop in ViewData.ModelMetadata.Properties)
+			{
+			<tr class="form-group">
+				<td>@Html.Label(prop.PropertyName, htmlAttributes: new { @class = "control-label col-sm-3" })</td>
+				<td>
+					@Html.Editor(prop.PropertyName)
+					@Html.ValidationMessage(prop.PropertyName)
+				</td>
+				@if (first)
+				{
+					first = false;
+					<td rowspan="@ViewData.ModelMetadata.Properties.Count()">
+						<a href="javascript://" class="btn btn-danger btn-sm js-remove-row">Remove</a>
+					</td>
+				}
+			</tr>
+			}
+		</table>
+	</div>
+</div>
+
+

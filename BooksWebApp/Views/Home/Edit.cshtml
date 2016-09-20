@@ -1,0 +1,11 @@
+﻿@model BooksWebApp.Models.BookModel
+
+@{
+	Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@using (Html.BeginForm(htmlAttributes: new { @class = "form-horizontal", enctype = "multipart/form-data" }, actionName: null, controllerName: null, method: FormMethod.Post))
+{
+	@Html.EditorForModel()
+	<input type="submit" value="Save" class="btn btn-default" />
+}

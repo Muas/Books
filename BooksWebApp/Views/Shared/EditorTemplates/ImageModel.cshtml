@@ -1,0 +1,8 @@
+﻿@model BooksWebApp.Models.BookModel.ImageModel
+
+@if (Model?.Url != null)
+{
+	<img src="@Url.Content(Model.Url)" />
+}
+@Html.HiddenFor(m => m.Url)
+@Html.EditorFor(m => m.Upload)

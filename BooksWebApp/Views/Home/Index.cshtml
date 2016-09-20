@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Book";
+}
+
+<div class="container">
+	<div class="row">
+		@Html.ActionLink("Add", actionName: "Edit", htmlAttributes: new {@class = "btn btn-danger fancybox", data_fancybox_type = "iframe"}, routeValues: null)
+	</div>
+
+	<div class="row book-table_container">@Html.Action("Books")</div>
+
+</div>
+
+
